@@ -1,16 +1,15 @@
-# carbo
+# Carbos - Carbon Footprint Calculator
 
-A new Flutter project.
+The Carbon Footprint Calculator is a Flutter-based mobile application developed as part of the Google Solution Challenge for the sustainability goals. The project aims to raise awareness about individual carbon emissions and encourage users to make more sustainable choices in their daily lives.
 
-## Getting Started
+The calculator allows users to input information about their daily tasks, such as transportation, energy consumption, and waste generation. Based on these inputs, the app calculates the user's carbon footprint and provides a clear indication of whether they should strive to reduce it.
 
-This project is a starting point for a Flutter application.
+### Key Features:
 
-A few resources to get you started if this is your first Flutter project:
+- Intuitive user interface for easy data input
+- Calculation of carbon footprint based on user inputs
+- Personalized recommendations for reducing carbon emissions
+- Educational resources on sustainable practices
+- Multi-platform support (Android and iOS) through Flutter framework
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+By using the Carbon Footprint Calculator, individuals can gain insights into their carbon emissions and understand the environmental impact of their daily activities. This awareness empowers users to take conscious steps towards reducing their carbon footprint and contributes to the global sustainability goals.
