@@ -57,7 +57,7 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "   $carbon",
+                  "   ${(carbon*10).round()/10}",
                   style: TextStyle(fontSize: 50,color: Colors.white),
                 ),
                 Padding(
