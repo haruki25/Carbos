@@ -2,6 +2,7 @@ import 'package:carbo/Screen/home.dart';
 import 'package:carbo/second_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -34,6 +35,9 @@ List<String> goal = List.generate(4, (index) => '0.0');
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+      ]);
     load_data();
     super.initState();
   }
@@ -95,7 +99,7 @@ class _MyAppState extends State<MyApp> {
           FittedBox(
             fit: BoxFit.fitWidth,
             child: Text(
-              'Track Your Carbon FootPrint',
+              'Track Your Carbon \n FootPrint',
               style: TextStyle(fontSize: screenlen * 0.05),
               textAlign: TextAlign.center,
             ),

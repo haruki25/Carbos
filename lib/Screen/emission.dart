@@ -203,7 +203,7 @@ class _EmissionScreenState extends State<EmissionScreen> {
                                     carbon: double.parse(
                                         widget.map['${months[counter]}']![3]),
                                     icon: 'assets/icon/food.png'),
-                                SizedBox(height: screenlen * 0.05),
+                                SizedBox(height: screenlen * 0.1),
                               ],
                             ),
                           ),
@@ -335,7 +335,7 @@ class _EmissionScreenState extends State<EmissionScreen> {
                                       carbon: double.parse(
                                           widget.map['${months[counter]}']![3]),
                                       icon: 'assets/icon/food.png'),
-                                  SizedBox(height: screenlen * 0.05),
+                                  SizedBox(height: screenlen * 0.1),
                                 ],
                               ),
                             ),
