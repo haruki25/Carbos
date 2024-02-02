@@ -62,6 +62,8 @@ class _TileState extends State<Tile> {
     } else {
       idx = 3;
     }
+    double screenlen = MediaQuery.of(context).size.height;
+    double screenwid = MediaQuery.of(context).size.width;
     return Column(
       children: [
         InkWell(
@@ -82,14 +84,17 @@ class _TileState extends State<Tile> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 widget.title,
-                style: TextStyle(color: Colors.black, fontSize: 25),
+                style: TextStyle(color: Colors.black,fontSize: 25),
               ),
             ),
             trailing: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                '${widget.carbon}',
-                style: TextStyle(color: Colors.black, fontSize: 25),
+              child: FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text(
+                  '${widget.carbon}',
+                  style: TextStyle(color: Colors.black,fontSize: 25),
+                ),
               ),
             ),
           ),
@@ -100,7 +105,7 @@ class _TileState extends State<Tile> {
                 children: [
                   AnimatedContainer(
                     duration: Duration(milliseconds: 300),
-                    width: MediaQuery.of(context).size.width * 2 / 3,
+                    width: screenwid < screenlen ? screenwid* 2 / 3: screenwid *0.5,
                     child: Slider(
                       value: val,
                       onChanged: (newRating) {

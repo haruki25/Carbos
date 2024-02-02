@@ -40,7 +40,7 @@ class _SecondScreenState extends State<SecondScreen> {
       backgroundColor:
           value == 2 || value == 3 ? Colors.green[100] : Colors.green[100],
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(screenlen*0.1),
+        preferredSize: Size.fromHeight(screenlen*0.08),
         child: AppBar(
           backgroundColor: value == 1 || value == 0
               ? Color.fromRGBO(94, 140, 97, 100)
