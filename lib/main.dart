@@ -76,6 +76,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     double screenlen = MediaQuery.of(context).size.height;
+    print(screenlen);
+    double screenwid = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: Colors.green[100],
@@ -85,32 +87,33 @@ class _MyAppState extends State<MyApp> {
             height: screenlen * 0.2,
           ),
           Container(
-              height: 209,
-              width: 209,
+              height: screenlen * 0.2,
+              width: screenwid * 80,
               child: Image.asset(
                 'assets/carbonising.png',
               )),
-          Text(
-            'Track Your Carbon FootPrint',
-            style: TextStyle(fontSize: 36),
-            textAlign: TextAlign.center,
+          FittedBox(
+            fit: BoxFit.fitWidth,
+            child: Text(
+              'Track Your Carbon FootPrint',
+              style: TextStyle(fontSize: screenlen * 0.05),
+              textAlign: TextAlign.center,
+            ),
           ),
           SizedBox(
             height: screenlen * 0.3,
           ),
           Container(
-              height: 50,
-              width: 155,
+              height: screenlen * 0.07,
+              width: screenwid * 0.45,
               child: InkWell(
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context){
                     return SecondScreen(map: mp, goal: goal);
                   }));
                 },
-                child: Hero(
-                    tag: 'hero-tag',
-                    child: Center(child: Image.asset('assets/Logo.png'))),
+                child: Center(child: Image.asset('assets/Logo.png')),
                 splashColor: Color.fromRGBO(36, 58, 90, 100),
                 borderRadius: BorderRadius.circular(10),
               ))

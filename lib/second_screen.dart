@@ -25,8 +25,10 @@ class _SecondScreenState extends State<SecondScreen> {
 
   Widget build(BuildContext context) {
     double screenlen = MediaQuery.of(context).size.height;
+
+    double screenwid = MediaQuery.of(context).size.width;
     Widget active = AnimatedSizeAndFade(
-      fadeDuration: Duration(milliseconds: 700),
+        fadeDuration: Duration(milliseconds: 700),
         child: value == 0
             ? HomeScreen(map: widget.map)
             : value == 1
@@ -37,96 +39,109 @@ class _SecondScreenState extends State<SecondScreen> {
     return Scaffold(
       backgroundColor:
           value == 2 || value == 3 ? Colors.green[100] : Colors.green[100],
-      appBar: AppBar(
-        backgroundColor: value == 1 || value == 0
-            ? Color.fromRGBO(94, 140, 97, 100)
-            : Colors.green[300],
-        title: Text(text, style: TextStyle(color: Colors.white)),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(screenlen*0.1),
+        child: AppBar(
+          backgroundColor: value == 1 || value == 0
+              ? Color.fromRGBO(94, 140, 97, 100)
+              : Colors.green[300],
+          title: Text(text, style: TextStyle(color: Colors.white)),
+        ),
       ),
       body: Stack(
         children: [
           active,
-          Expanded(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Stack(
-                alignment: AlignmentDirectional.topCenter,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: Container(
-                      height: 60,
-                      width: double.infinity,
-                      color: Colors.brown[900],
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                value = 0;
-                                text = "My Foot Print";
-                              });
-                            },
-                            icon: Image.asset('assets/Home.png', height: 20),
-                            color: Colors.green[200],
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Stack(
+              alignment: AlignmentDirectional.topCenter,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: screenlen*0.025,),
+                  child: Container(
+                    height: screenlen * 0.08,
+                    width: double.infinity,
+                    color: Colors.brown[900],
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              value = 0;
+                              text = "My Foot Print";
+                            });
+                          },
+                          icon: Image.asset('assets/Home.png',
+                              height: screenlen * 0.025),
+                          color: Colors.green[200],
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              value = 1;
+                              text = "LeaderBoard";
+                            });
+                          },
+                          icon: Image.asset(
+                            'assets/Leaderbord.png',
+                            height: screenlen * 0.025,
+                            width: screenwid * 0.1,
                           ),
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                value = 1;
-                                text = "LeaderBoard";
-                              });
-                            },
-                            icon: Image.asset(
-                              'assets/Leaderbord.png',
-                              height: 20,
-                            ),
-                            color: Colors.green[200],
+                          color: Colors.green[200],
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              value = 2;
+                              text = "Emission";
+                            });
+                          },
+                          icon: Image.asset(
+                            'assets/Emissions.png',
+                            height: screenlen * 0.025,
+                            width: screenwid * 0.1,
                           ),
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                value = 2;
-                                text = "Emission";
-                              });
-                            },
-                            icon:
-                                Image.asset('assets/Emissions.png', height: 20),
-                            color: Colors.green[200],
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                value = 3;
-                                text = "Goals";
-                              });
-                            },
-                            icon: Image.asset('assets/Goal.png', height: 20),
-                            color: Colors.green[200],
-                          )
-                        ],
-                      ),
+                          color: Colors.green[200],
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              value = 3;
+                              text = "Goals";
+                            });
+                          },
+                          icon: Image.asset('assets/Goal.png',
+                              width: screenwid * 0.1,
+                              height: screenlen * 0.025),
+                          color: Colors.green[200],
+                        )
+                      ],
                     ),
                   ),
-                  Container(
-                      height: 40,
-                      width: 40,
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.green.withOpacity(0.3),
-                              spreadRadius: 7,
-                              blurRadius: 7,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(25),
-                          color: Color.fromRGBO(90, 160, 97, 100)),
-                      child: Center(
-                          child: Image.asset('assets/Search.png', height: 20))),
-                ],
-              ),
+                ),
+                Container(
+                    height: screenlen * 0.05 < screenwid * 0.1
+                        ? screenlen * 0.05
+                        : screenwid * 0.1,
+                    width: screenwid * 0.1 < screenlen * 0.05
+                        ? screenwid * 0.1
+                        : screenlen * 0.05,
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.green.withOpacity(0.3),
+                            spreadRadius: 7,
+                            blurRadius: 7,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(25),
+                        color: Color.fromRGBO(90, 160, 97, 100)),
+                    child: Center(
+                        child: Image.asset('assets/Search.png',
+                            height: screenlen * 0.025))),
+              ],
             ),
           ),
         ],
