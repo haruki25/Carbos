@@ -1,24 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:carbo/Data/data.dart';
 class HomeScreen extends StatelessWidget {
   Map<String, List<String>> map;
 
   HomeScreen({required this.map});
 
-  List<String> months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec'
-  ];
 
   @override
   Widget build(BuildContext context) {

@@ -7,6 +7,7 @@ import 'Screen/LeaderBoard.dart';
 import 'Screen/emission.dart';
 import 'Screen/goals.dart';
 
+
 class SecondScreen extends StatefulWidget {
   Map<String, List<String>> map;
 

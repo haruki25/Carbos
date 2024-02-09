@@ -3,6 +3,7 @@ import 'package:carbo/second_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart';
+import 'package:carbo/Data/data.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -62,20 +63,7 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  List<String> months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec'
-  ];
+
 
   @override
   Widget build(BuildContext context) {

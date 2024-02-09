@@ -4,7 +4,7 @@ import 'package:carbo/Models/Tiles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
-
+import 'package:carbo/Data/data.dart';
 class EmissionScreen extends StatefulWidget {
   Map<String, List<String>> map;
 
@@ -30,20 +30,6 @@ class _EmissionScreenState extends State<EmissionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec'
-    ];
     double screenlen = MediaQuery.of(context).size.height;
     double screenwid = MediaQuery.of(context).size.width;
     if (total == 0)
