@@ -41,6 +41,7 @@ class _TileState extends State<Tile> {
     } else {
       idx = 3;
     }
+    print("Sumit is Here");
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     widget.updatetotal(val - double.parse(widget.data[idx]));
     print("value added to total");
