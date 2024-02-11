@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 import '../Models/Tiles.dart';
-
+import 'package:carbo/Data/data.dart';
 class GoalsScreen extends StatefulWidget {
   List<String> goal;
 
@@ -37,21 +37,14 @@ class _GoalsScreenState extends State<GoalsScreen> {
     }
 
     Map<String, double> datamap = {
-      "purchase": double.parse(widget.goal[0]),
+      "Purchase": double.parse(widget.goal[0]),
       "Petrol": double.parse(widget.goal[1]),
       "Electricity": double.parse(widget.goal[2]),
       "Food": double.parse(widget.goal[3])
     };
-    List<Color> colorList = [
-      Colors.green[100]!,
-      Colors.brown[500]!,
-      Colors.green[500]!,
-      Colors.brown[300]!,
-    ];
 
     Key _chartKey = GlobalKey();
-    Widget active = screenlen > screenwid
-        ? Container(
+    Widget active = Container(
             height: screenlen,
             child: Stack(
               alignment: Alignment.bottomCenter,
@@ -59,7 +52,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
                 Container(
                   height: screenlen,
                   width: double.infinity,
-                  color: Colors.green[300],
+                  color: Theme.of(context).colorScheme.primaryContainer,
                   child: Column(children: [
                     Padding(
                       padding: const EdgeInsets.all(20.0),
@@ -81,7 +74,6 @@ class _GoalsScreenState extends State<GoalsScreen> {
                   height: screenlen * 0.75 < screenwid
                       ? screenlen * 0.5
                       : screenlen * 0.6,
-                  width: screenlen < screenwid ? screenwid * 0.5 : screenwid,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -98,7 +90,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
                               fit: BoxFit.fitWidth,
                               child: Text(
                                 "${(total * 10).round() / 10} ton C02/yr",
-                                style: TextStyle(
+                                style: TextStyle(fontWeight: FontWeight.bold,
                                     color: Colors.black, fontSize: 30),
                               ),
                             ),
@@ -112,129 +104,36 @@ class _GoalsScreenState extends State<GoalsScreen> {
                                     updatetotal: _updatetotal,
                                     tag: 'goal',
                                     data: widget.goal,
-                                    title: "purchase",
+                                    title: "Purchase",
                                     carbon: double.parse(widget.goal[0]),
-                                    icon: 'assets/icon/Group.png'),
+                                    icon: Icons.local_mall),
                                 Tile(
                                     updatetotal: _updatetotal,
                                     tag: 'goal',
                                     data: widget.goal,
                                     title: 'Petrol',
                                     carbon: double.parse(widget.goal[1]),
-                                    icon: 'assets/icon/Vector.png'),
+                                    icon: Icons.local_gas_station),
                                 Tile(
                                     updatetotal: _updatetotal,
                                     tag: 'goal',
                                     data: widget.goal,
                                     title: 'Electricity',
                                     carbon: double.parse(widget.goal[2]),
-                                    icon: 'assets/icon/electric.png'),
+                                    icon: Icons.electric_bolt),
                                 Tile(
                                     updatetotal: _updatetotal,
                                     tag: 'goal',
                                     data: widget.goal,
                                     title: "Food",
                                     carbon: double.parse(widget.goal[3]),
-                                    icon: 'assets/icon/food.png'),
+                                    icon: Icons.lunch_dining),
                                 SizedBox(height: screenlen * 0.1),
                               ],
                             ),
                           ),
                         )
                       ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-          )
-        : Container(
-            color: Colors.green[300],
-            child: Row(
-              children: [
-                SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(20.0, 20, 20, screenlen * 0.1),
-                    child: PieChart(
-                      key: _chartKey,
-                      dataMap: datamap,
-                      colorList: colorList,
-                      centerText: "${(total * 10).round() / 10}",
-                      chartRadius: max(screenlen * 0.2, screenwid * 0.25),
-                      chartValuesOptions:
-                          ChartValuesOptions(showChartValues: false),
-                      chartType: ChartType.ring,
-                      ringStrokeWidth: 24,
-                      legendOptions:
-                          LegendOptions(legendPosition: LegendPosition.bottom),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    height: screenlen,
-                    width: screenwid * 0.5,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(50),
-                            topRight: Radius.circular(50))),
-                    child: Container(
-                      height: screenlen * 0.4,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            contentPadding: EdgeInsets.all(screenwid * 0.05),
-                            title: Center(
-                              child: FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: Text(
-                                  "${(total * 10).round() / 10} ton C02/yr",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 30),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  Tile(
-                                      updatetotal: _updatetotal,
-                                      tag: 'goal',
-                                      data: widget.goal,
-                                      title: "purchase",
-                                      carbon: double.parse(widget.goal[0]),
-                                      icon: 'assets/icon/Group.png'),
-                                  Tile(
-                                      updatetotal: _updatetotal,
-                                      tag: 'goal',
-                                      data: widget.goal,
-                                      title: 'Petrol',
-                                      carbon: double.parse(widget.goal[1]),
-                                      icon: 'assets/icon/Vector.png'),
-                                  Tile(
-                                      updatetotal: _updatetotal,
-                                      tag: 'goal',
-                                      data: widget.goal,
-                                      title: 'Electricity',
-                                      carbon: double.parse(widget.goal[2]),
-                                      icon: 'assets/icon/electric.png'),
-                                  Tile(
-                                      updatetotal: _updatetotal,
-                                      tag: 'goal',
-                                      data: widget.goal,
-                                      title: "Food",
-                                      carbon: double.parse(widget.goal[3]),
-                                      icon: 'assets/icon/food.png'),
-                                  SizedBox(height: screenlen * 0.1),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
                     ),
                   ),
                 )

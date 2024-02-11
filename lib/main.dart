@@ -1,4 +1,5 @@
 import 'package:carbo/Screen/home.dart';
+import 'package:carbo/Theme/theme.dart';
 import 'package:carbo/second_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,6 +9,7 @@ import 'package:carbo/Data/data.dart';
 void main() {
   runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: themeLight,
       title: 'Carbon Footprint Calculator',
       home: MyApp()));
 }
@@ -72,7 +74,7 @@ class _MyAppState extends State<MyApp> {
     double screenwid = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Colors.green[100],
+      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       body: Column(
         children: [
           SizedBox(
@@ -88,7 +90,7 @@ class _MyAppState extends State<MyApp> {
             fit: BoxFit.fitWidth,
             child: Text(
               'Track Your Carbon \n FootPrint',
-              style: TextStyle(fontSize: screenlen * 0.05),
+              style: TextStyle(fontSize: screenlen * 0.04,fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
           ),
@@ -106,7 +108,7 @@ class _MyAppState extends State<MyApp> {
                   }));
                 },
                 child: Center(child: Image.asset('assets/Logo.png')),
-                splashColor: Color.fromRGBO(36, 58, 90, 100),
+                splashColor: Theme.of(context).colorScheme.tertiary,
                 borderRadius: BorderRadius.circular(10),
               ))
         ],

@@ -7,7 +7,6 @@ import 'Screen/LeaderBoard.dart';
 import 'Screen/emission.dart';
 import 'Screen/goals.dart';
 
-
 class SecondScreen extends StatefulWidget {
   Map<String, List<String>> map;
 
@@ -38,15 +37,23 @@ class _SecondScreenState extends State<SecondScreen> {
                     ? EmissionScreen(map: widget.map)
                     : GoalsScreen(goal: widget.goal));
     return Scaffold(
-      backgroundColor:
-          value == 2 || value == 3 ? Colors.green[100] : Colors.green[100],
+      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(screenlen*0.08),
+        preferredSize: Size.fromHeight(screenlen * 0.08),
         child: AppBar(
           backgroundColor: value == 1 || value == 0
-              ? Color.fromRGBO(94, 140, 97, 100)
-              : Colors.green[300],
-          title: Text(text, style: TextStyle(color: Colors.white)),
+              ? Theme.of(context).colorScheme.secondary
+              : Theme.of(context).colorScheme.primaryContainer,
+          title: value == 0
+              ? Text(text, style: TextStyle(color: Colors.white))
+              : Center(
+                  child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: Text(text,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold)))),
         ),
       ),
       body: Stack(
@@ -58,11 +65,13 @@ class _SecondScreenState extends State<SecondScreen> {
               alignment: AlignmentDirectional.topCenter,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: screenlen*0.025,),
+                  padding: EdgeInsets.only(
+                    top: screenlen * 0.025,
+                  ),
                   child: Container(
                     height: screenlen * 0.08,
                     width: double.infinity,
-                    color: Colors.brown[900],
+                    color: Theme.of(context).colorScheme.tertiary,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -73,9 +82,8 @@ class _SecondScreenState extends State<SecondScreen> {
                               text = "My Foot Print";
                             });
                           },
-                          icon: Image.asset('assets/Home.png',
-                              height: screenlen * 0.025),
-                          color: Colors.green[200],
+                          icon: Icon(Icons.home, size: screenlen * 0.032),
+                          color: Theme.of(context).colorScheme.primaryContainer,
                         ),
                         IconButton(
                           onPressed: () {
@@ -84,12 +92,11 @@ class _SecondScreenState extends State<SecondScreen> {
                               text = "LeaderBoard";
                             });
                           },
-                          icon: Image.asset(
-                            'assets/Leaderbord.png',
-                            height: screenlen * 0.025,
-                            width: screenwid * 0.1,
+                          icon: Icon(
+                            Icons.leaderboard,
+                            size: screenlen * 0.032,
                           ),
-                          color: Colors.green[200],
+                          color: Theme.of(context).colorScheme.primaryContainer,
                         ),
                         IconButton(
                           onPressed: () {
@@ -98,12 +105,11 @@ class _SecondScreenState extends State<SecondScreen> {
                               text = "Emission";
                             });
                           },
-                          icon: Image.asset(
-                            'assets/Emissions.png',
-                            height: screenlen * 0.025,
-                            width: screenwid * 0.1,
+                          icon: Icon(
+                            Icons.co2,
+                            size: screenlen * 0.04,
                           ),
-                          color: Colors.green[200],
+                          color: Theme.of(context).colorScheme.primaryContainer,
                         ),
                         IconButton(
                           onPressed: () {
@@ -112,10 +118,8 @@ class _SecondScreenState extends State<SecondScreen> {
                               text = "Goals";
                             });
                           },
-                          icon: Image.asset('assets/Goal.png',
-                              width: screenwid * 0.1,
-                              height: screenlen * 0.025),
-                          color: Colors.green[200],
+                          icon: Icon(Icons.task_alt, size: screenlen * 0.032),
+                          color: Theme.of(context).colorScheme.primaryContainer,
                         )
                       ],
                     ),
@@ -129,19 +133,17 @@ class _SecondScreenState extends State<SecondScreen> {
                         ? screenwid * 0.1
                         : screenlen * 0.05,
                     decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.green.withOpacity(0.3),
-                            spreadRadius: 7,
-                            blurRadius: 7,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
                         borderRadius: BorderRadius.circular(25),
-                        color: Color.fromRGBO(90, 160, 97, 100)),
+                        border: Border.all(
+                            color:
+                                Theme.of(context).colorScheme.primaryContainer),
+                        color: Theme.of(context).colorScheme.tertiary),
                     child: Center(
-                        child: Image.asset('assets/Search.png',
-                            height: screenlen * 0.025))),
+                        child: Icon(
+                      Icons.search,
+                      size: screenlen * 0.032,
+                      color: Theme.of(context).colorScheme.primaryContainer,
+                    ))),
               ],
             ),
           ),

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:carbo/Data/data.dart';
+import 'package:carbo/Data/data.dart';
 class EmissionScreen extends StatefulWidget {
   Map<String, List<String>> map;
 
@@ -40,26 +41,20 @@ class _EmissionScreenState extends State<EmissionScreen> {
     Key _chartKey = GlobalKey();
 
     Map<String, double> datamap = {
-      "purchase": double.parse(widget.map['${months[counter]}']![0]),
+      "Purchase": double.parse(widget.map['${months[counter]}']![0]),
       "Petrol": double.parse(widget.map['${months[counter]}']![1]),
       "Electricity": double.parse(widget.map['${months[counter]}']![2]),
       "Food": double.parse(widget.map['${months[counter]}']![3])
     };
-    List<Color> colorList = [
-      Colors.green[100]!,
-      Colors.brown[500]!,
-      Colors.green[500]!,
-      Colors.brown[300]!,
-    ];
-    Widget active = screenlen > screenwid
-        ? Container(
+    Widget active = Container(
             height: screenlen,
             width: double.infinity,
-            color: Colors.green[300],
+            color: Theme.of(context).colorScheme.primaryContainer,
             child: Stack(
               alignment: Alignment.bottomCenter,
               children: [
-                Column(children: [
+                Column(
+                    children: [
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: PieChart(
@@ -79,7 +74,6 @@ class _EmissionScreenState extends State<EmissionScreen> {
                   height: screenlen * 0.75 < screenwid
                       ? screenlen * 0.5
                       : screenlen * 0.6,
-                  width: screenlen < screenwid ? screenwid * 0.5 : screenwid,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -88,6 +82,7 @@ class _EmissionScreenState extends State<EmissionScreen> {
                   child: Container(
                     height: screenlen * 0.4,
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         ListTile(
                           contentPadding: EdgeInsets.all(screenwid * 0.05),
@@ -106,13 +101,7 @@ class _EmissionScreenState extends State<EmissionScreen> {
                                 });
                               }
                             },
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Image.asset(
-                                'assets/icon/left.png',
-                                height: 30,
-                              ),
-                            ),
+                            child: Icon(Icons.chevron_left,size: 30,)
                           ),
                           trailing: InkWell(
                             onTap: () {
@@ -129,13 +118,7 @@ class _EmissionScreenState extends State<EmissionScreen> {
                                 });
                               }
                             },
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Image.asset(
-                                'assets/icon/right.png',
-                                height: 30,
-                              ),
-                            ),
+                            child: Icon(Icons.chevron_right,size: 30,)
                           ),
                           title: TextButton(
                             onPressed: () {},
@@ -143,8 +126,7 @@ class _EmissionScreenState extends State<EmissionScreen> {
                               fit: BoxFit.fitWidth,
                               child: Text(
                                 "${months[counter]} 2024",
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 25),
+                                style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black, fontSize: 25),
                               ),
                             ),
                           ),
@@ -158,10 +140,10 @@ class _EmissionScreenState extends State<EmissionScreen> {
                                     tag: '${months[counter]}',
                                     data: widget.map['${months[counter]}']!,
                                     check: counter == now.month - 1,
-                                    title: "purchase",
+                                    title: "Purchase",
                                     carbon: double.parse(
                                         widget.map['${months[counter]}']![0]),
-                                    icon: 'assets/icon/Group.png'),
+                                    icon: Icons.local_mall),
                                 Tile(
                                     updatetotal: _updatetotal,
                                     tag: '${months[counter]}',
@@ -170,7 +152,7 @@ class _EmissionScreenState extends State<EmissionScreen> {
                                     title: 'Petrol',
                                     carbon: double.parse(
                                         widget.map['${months[counter]}']![1]),
-                                    icon: 'assets/icon/Vector.png'),
+                                    icon: Icons.local_gas_station),
                                 Tile(
                                     updatetotal: _updatetotal,
                                     tag: '${months[counter]}',
@@ -179,7 +161,7 @@ class _EmissionScreenState extends State<EmissionScreen> {
                                     title: 'Electricity',
                                     carbon: double.parse(
                                         widget.map['${months[counter]}']![2]),
-                                    icon: 'assets/icon/electric.png'),
+                                    icon: Icons.electric_bolt),
                                 Tile(
                                     updatetotal: _updatetotal,
                                     tag: '${months[counter]}',
@@ -188,7 +170,7 @@ class _EmissionScreenState extends State<EmissionScreen> {
                                     title: "Food",
                                     carbon: double.parse(
                                         widget.map['${months[counter]}']![3]),
-                                    icon: 'assets/icon/food.png'),
+                                    icon: Icons.lunch_dining),
                                 SizedBox(height: screenlen * 0.1),
                               ],
                             ),
@@ -199,141 +181,7 @@ class _EmissionScreenState extends State<EmissionScreen> {
                   ),
                 )
               ],
-            ))
-        : Container(
-            color: Colors.green[300],
-            child: Row(
-              children: [
-                SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(20.0, 20, 20, screenlen * 0.1),
-                    child: PieChart(
-                      key: _chartKey,
-                      dataMap: datamap,
-                      colorList: colorList,
-                      centerText: "${(total * 10).round() / 10}",
-                      chartRadius: max(screenlen * 0.2, screenwid * 0.25),
-                      chartValuesOptions:
-                          ChartValuesOptions(showChartValues: false),
-                      chartType: ChartType.ring,
-                      ringStrokeWidth: 24,
-                      legendOptions:
-                          LegendOptions(legendPosition: LegendPosition.bottom),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    height: screenlen,
-                    width: screenwid * 0.5,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(50),
-                            topRight: Radius.circular(50))),
-                    child: Container(
-                      height: screenlen * 0.4,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            contentPadding: EdgeInsets.all(screenwid * 0.05),
-                            leading: InkWell(
-                              onTap: () {
-                                if (counter != 0)
-                                  setState(() {
-                                    counter--;
-                                    print(counter);
-                                  });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Image.asset(
-                                  'assets/icon/left.png',
-                                  height: 30,
-                                ),
-                              ),
-                            ),
-                            trailing: InkWell(
-                              onTap: () {
-                                if (counter != 11)
-                                  setState(() {
-                                    counter++;
-                                    print(counter);
-                                  });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Image.asset(
-                                  'assets/icon/right.png',
-                                  height: 30,
-                                ),
-                              ),
-                            ),
-                            title: TextButton(
-                              onPressed: () {},
-                              child: FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: Text(
-                                  "${months[counter]} 2023",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 25),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  Tile(
-                                      updatetotal: _updatetotal,
-                                      tag: '${months[counter]}',
-                                      data: widget.map['${months[counter]}']!,
-                                      check: counter == now.month - 1,
-                                      title: "purchase",
-                                      carbon: double.parse(
-                                          widget.map['${months[counter]}']![0]),
-                                      icon: 'assets/icon/Group.png'),
-                                  Tile(
-                                      updatetotal: _updatetotal,
-                                      tag: '${months[counter]}',
-                                      data: widget.map['${months[counter]}']!,
-                                      check: counter == now.month - 1,
-                                      title: 'Petrol',
-                                      carbon: double.parse(
-                                          widget.map['${months[counter]}']![1]),
-                                      icon: 'assets/icon/Vector.png'),
-                                  Tile(
-                                      updatetotal: _updatetotal,
-                                      tag: '${months[counter]}',
-                                      data: widget.map['${months[counter]}']!,
-                                      check: counter == now.month - 1,
-                                      title: 'Electricity',
-                                      carbon: double.parse(
-                                          widget.map['${months[counter]}']![2]),
-                                      icon: 'assets/icon/electric.png'),
-                                  Tile(
-                                      updatetotal: _updatetotal,
-                                      tag: '${months[counter]}',
-                                      data: widget.map['${months[counter]}']!,
-                                      check: counter == now.month - 1,
-                                      title: "Food",
-                                      carbon: double.parse(
-                                          widget.map['${months[counter]}']![3]),
-                                      icon: 'assets/icon/food.png'),
-                                  SizedBox(height: screenlen * 0.1),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          );
+            ));
     return active;
   }
 }

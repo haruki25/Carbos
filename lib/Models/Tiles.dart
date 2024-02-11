@@ -7,7 +7,7 @@ class Tile extends StatefulWidget {
 
   String title;
   double carbon;
-  String icon;
+  IconData icon;
   bool check;
   List<String> data;
   String tag;
@@ -32,7 +32,7 @@ double val = 0;
 class _TileState extends State<Tile> {
   void load_data(double newRating) async {
     int idx = 0;
-    if (widget.title == 'purchase') {
+    if (widget.title == 'Purchase') {
       idx = 0;
     } else if (widget.title == 'Petrol') {
       idx = 1;
@@ -44,16 +44,17 @@ class _TileState extends State<Tile> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     widget.updatetotal(val - double.parse(widget.data[idx]));
     print("value added to total");
-    print(val -double.parse(widget.data[idx]));
+    print(val - double.parse(widget.data[idx]));
     widget.data[idx] = newRating.toString();
     await prefs.setStringList('${widget.tag}', widget.data);
     print("changed successfully");
+    val = 0.0;
   }
 
   @override
   Widget build(BuildContext context) {
     int idx = 0;
-    if (widget.title == 'purchase') {
+    if (widget.title == 'Purchase') {
       idx = 0;
     } else if (widget.title == 'Petrol') {
       idx = 1;
@@ -64,6 +65,7 @@ class _TileState extends State<Tile> {
     }
     double screenlen = MediaQuery.of(context).size.height;
     double screenwid = MediaQuery.of(context).size.width;
+
     return Column(
       children: [
         InkWell(
@@ -73,18 +75,13 @@ class _TileState extends State<Tile> {
             });
           },
           child: ListTile(
-            titleAlignment: ListTileTitleAlignment.top,
-            leading: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Image.asset(
-                widget.icon,
-              ),
-            ),
+            titleAlignment: ListTileTitleAlignment.center,
+            leading: Icon(widget.icon),
             title: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 widget.title,
-                style: TextStyle(color: Colors.black,fontSize: 25),
+                style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.w700),
               ),
             ),
             trailing: Padding(
@@ -93,13 +90,17 @@ class _TileState extends State<Tile> {
                 fit: BoxFit.fitWidth,
                 child: Text(
                   '${widget.carbon}',
-                  style: TextStyle(color: Colors.black,fontSize: 25),
+                  style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.w700),
                 ),
               ),
             ),
           ),
         ),
-        widget.isvalue && widget.check
+        widget.isvalue
+
+        //check is comment for debugging purpose
+
+            && widget.check
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
