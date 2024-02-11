@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# carbos
-=======
 # Carbos - Carbon Footprint Calculator
 
 The Carbon Footprint Calculator is a Flutter-based mobile application developed as part of the Google Solution Challenge for the sustainability goals. The project aims to raise awareness about individual carbon emissions and encourage users to make more sustainable choices in their daily lives.
@@ -16,4 +13,3 @@ The calculator allows users to input information about their daily tasks, such a
 - Multi-platform support (Android and iOS) through Flutter framework
 
 By using the Carbon Footprint Calculator, individuals can gain insights into their carbon emissions and understand the environmental impact of their daily activities. This awareness empowers users to take conscious steps towards reducing their carbon footprint and contributes to the global sustainability goals.
->>>>>>> 84d043c ("Carbos App Stage 1")
